@@ -1,0 +1,873 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   DESIGN SYSTEM - Cody Avila Portfolio
+   ============================================================================
+   
+   PHILOSOPHY:
+   - Usability first, aesthetics second
+   - Snappy, responsive interactions (150ms default)
+   - Motion handled by Framer Motion, CSS handles color/shadow
+   - Consistent 4px spacing scale
+   
+   THEMING:
+   - Supports manual theme toggle (light/dark/system)
+   - Supports high contrast mode
+   - Supports colorblind-friendly modes (deuteranopia, protanopia, tritanopia)
+   - Falls back to system preferences via media queries
+   - WCAG 2.1 AA compliant contrast ratios
+   
+   ============================================================================ */
+
+/* ============================================================================
+   THEME: DARK MODE (Default)
+   ============================================================================ */
+:root,
+:root.dark {
+  /* Background layers - darkest to lightest */
+  --bg-void: #050508;
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #0d0d14;
+  --bg-elevated: #12121a;
+  --bg-surface: #16161f;
+  
+  /* Text hierarchy - WCAG AA compliant on dark backgrounds */
+  --text-primary: #f8f8fc;
+  --text-secondary: #a0a0b8;
+  --text-muted: #707088;
+  --text-subtle: #505060;
+  
+  /* Accent colors */
+  --accent-emerald: #005f4b;
+  --accent-emerald-bright: #00c896;
+  --accent-cyan: #00d4ff;
+  --accent-cyan-muted: #0891b2;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  --accent-amber: #f59e0b;
+  
+  /* Component-specific */
+  --glass-bg: rgba(18, 18, 26, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  --glow-emerald: rgba(0, 95, 75, 0.4);
+  --glow-cyan: rgba(0, 212, 255, 0.3);
+  
+  /* Interactive states */
+  --focus-ring: var(--accent-cyan);
+  --btn-primary-bg: var(--accent-cyan);
+  --btn-primary-text: #0a0a0f;
+  --btn-secondary-border: #4a4a5a;
+  --btn-secondary-hover-bg: rgba(30, 30, 45, 0.8);
+  
+  /* Semantic colors */
+  --success: #22c55e;
+  --error: #ef4444;
+  --warning: var(--accent-amber);
+  
+  /* Grid and overlays */
+  --grid-line: rgba(255, 255, 255, 0.015);
+  --selection-bg: rgba(0, 212, 255, 0.25);
+  
+  /* Scrollbar */
+  --scrollbar-track: var(--bg-void);
+  --scrollbar-thumb: var(--text-subtle);
+  --scrollbar-thumb-hover: var(--text-muted);
+}
+
+/* ============================================================================
+   THEME: LIGHT MODE - Refined & Modern
+   ============================================================================ */
+:root.light {
+  /* Background layers - warm, sophisticated palette */
+  --bg-void: #fafbfc;
+  --bg-primary: #f5f6f8;
+  --bg-secondary: #eef0f3;
+  --bg-elevated: #ffffff;
+  --bg-surface: #ffffff;
+  
+  /* Text hierarchy - rich, readable */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+  
+  /* Accent colors - deeper, more saturated for light backgrounds */
+  --accent-emerald: #047857;
+  --accent-emerald-bright: #059669;
+  --accent-cyan: #0284c7;
+  --accent-cyan-muted: #0369a1;
+  --accent-blue: #2563eb;
+  --accent-purple: #7c3aed;
+  --accent-amber: #d97706;
+  
+  /* Component-specific - refined glass effect */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-border-hover: rgba(15, 23, 42, 0.16);
+  --glow-emerald: rgba(4, 120, 87, 0.12);
+  --glow-cyan: rgba(2, 132, 199, 0.12);
+  
+  /* Interactive states */
+  --focus-ring: var(--accent-cyan);
+  --btn-primary-bg: #0284c7;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-border: #cbd5e1;
+  --btn-secondary-hover-bg: rgba(15, 23, 42, 0.04);
+  
+  /* Semantic colors */
+  --success: #059669;
+  --error: #dc2626;
+  --warning: #d97706;
+  
+  /* Grid and overlays */
+  --grid-line: rgba(15, 23, 42, 0.04);
+  --selection-bg: rgba(2, 132, 199, 0.15);
+  
+  /* Scrollbar */
+  --scrollbar-track: var(--bg-primary);
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #94a3b8;
+}
+
+/* ============================================================================
+   THEME: HIGH CONTRAST - DARK
+   ============================================================================ */
+:root.dark.high-contrast,
+:root.high-contrast:not(.light) {
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e8;
+  --text-muted: #b0b0c0;
+  --text-subtle: #808090;
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-border-hover: rgba(255, 255, 255, 0.4);
+  --accent-emerald-bright: #00e6a8;
+  --accent-cyan: #40e0ff;
+  --accent-purple: #c084fc;
+  --accent-amber: #fbbf24;
+  --btn-secondary-border: #808090;
+  --focus-ring: #40e0ff;
+}
+
+/* ============================================================================
+   THEME: HIGH CONTRAST - LIGHT
+   ============================================================================ */
+:root.light.high-contrast {
+  --bg-void: #ffffff;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0f0f0;
+  --bg-elevated: #ffffff;
+  --bg-surface: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #1a1a1a;
+  --text-muted: #333333;
+  --text-subtle: #555555;
+  --accent-emerald: #005a45;
+  --accent-emerald-bright: #007a5e;
+  --accent-cyan: #005580;
+  --accent-cyan-muted: #004466;
+  --accent-blue: #1d4ed8;
+  --accent-purple: #6d28d9;
+  --accent-amber: #b45309;
+  --glass-border: rgba(0, 0, 0, 0.3);
+  --glass-border-hover: rgba(0, 0, 0, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --btn-primary-bg: #005580;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-border: #333333;
+  --selection-bg: rgba(0, 85, 128, 0.3);
+}
+
+/* ============================================================================
+   COLORBLIND: DEUTERANOPIA (Red-Green - Most Common)
+   Uses blue/orange palette instead of green/red
+   ============================================================================ */
+:root.colorblind-deuteranopia,
+:root.dark.colorblind-deuteranopia {
+  /* Replace greens with blues, keep distinction clear */
+  --accent-emerald: #1e40af;
+  --accent-emerald-bright: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-cyan-muted: #0891b2;
+  --accent-blue: #2563eb;
+  --accent-purple: #7c3aed;
+  --accent-amber: #ea580c;
+  --glow-emerald: rgba(59, 130, 246, 0.4);
+  --glow-cyan: rgba(6, 182, 212, 0.3);
+  --success: #3b82f6;
+  --error: #ea580c;
+  --warning: #eab308;
+  --btn-primary-bg: #3b82f6;
+  --focus-ring: #06b6d4;
+}
+
+:root.light.colorblind-deuteranopia {
+  --accent-emerald: #1d4ed8;
+  --accent-emerald-bright: #2563eb;
+  --accent-cyan: #0891b2;
+  --accent-cyan-muted: #0e7490;
+  --accent-amber: #c2410c;
+  --glow-emerald: rgba(37, 99, 235, 0.15);
+  --glow-cyan: rgba(8, 145, 178, 0.15);
+  --success: #2563eb;
+  --error: #c2410c;
+  --btn-primary-bg: #2563eb;
+}
+
+/* ============================================================================
+   COLORBLIND: PROTANOPIA (Red Blindness)
+   Similar to deuteranopia, emphasizes blue/yellow
+   ============================================================================ */
+:root.colorblind-protanopia,
+:root.dark.colorblind-protanopia {
+  --accent-emerald: #0369a1;
+  --accent-emerald-bright: #0ea5e9;
+  --accent-cyan: #22d3ee;
+  --accent-cyan-muted: #06b6d4;
+  --accent-blue: #0284c7;
+  --accent-purple: #6366f1;
+  --accent-amber: #fbbf24;
+  --glow-emerald: rgba(14, 165, 233, 0.4);
+  --glow-cyan: rgba(34, 211, 238, 0.3);
+  --success: #0ea5e9;
+  --error: #fbbf24;
+  --warning: #f59e0b;
+  --btn-primary-bg: #0ea5e9;
+  --focus-ring: #22d3ee;
+}
+
+:root.light.colorblind-protanopia {
+  --accent-emerald: #0369a1;
+  --accent-emerald-bright: #0284c7;
+  --accent-cyan: #0891b2;
+  --accent-cyan-muted: #0e7490;
+  --accent-amber: #d97706;
+  --glow-emerald: rgba(2, 132, 199, 0.15);
+  --glow-cyan: rgba(8, 145, 178, 0.15);
+  --success: #0284c7;
+  --error: #d97706;
+  --btn-primary-bg: #0284c7;
+}
+
+/* ============================================================================
+   COLORBLIND: TRITANOPIA (Blue-Yellow Blindness - Rare)
+   Uses red/cyan palette, avoids blue/yellow confusion
+   ============================================================================ */
+:root.colorblind-tritanopia,
+:root.dark.colorblind-tritanopia {
+  --accent-emerald: #be185d;
+  --accent-emerald-bright: #ec4899;
+  --accent-cyan: #14b8a6;
+  --accent-cyan-muted: #0d9488;
+  --accent-blue: #06b6d4;
+  --accent-purple: #e11d48;
+  --accent-amber: #14b8a6;
+  --glow-emerald: rgba(236, 72, 153, 0.4);
+  --glow-cyan: rgba(20, 184, 166, 0.3);
+  --success: #14b8a6;
+  --error: #e11d48;
+  --warning: #ec4899;
+  --btn-primary-bg: #14b8a6;
+  --focus-ring: #14b8a6;
+}
+
+:root.light.colorblind-tritanopia {
+  --accent-emerald: #9d174d;
+  --accent-emerald-bright: #be185d;
+  --accent-cyan: #0d9488;
+  --accent-cyan-muted: #0f766e;
+  --accent-amber: #0d9488;
+  --glow-emerald: rgba(190, 24, 93, 0.15);
+  --glow-cyan: rgba(13, 148, 136, 0.15);
+  --success: #0d9488;
+  --error: #be185d;
+  --btn-primary-bg: #0d9488;
+}
+
+/* ============================================================================
+   MEDIA QUERY FALLBACKS (When no class is set - system preference)
+   ============================================================================ */
+@media (prefers-color-scheme: light) {
+  :root:not(.dark):not(.light) {
+    --bg-void: #fafbfc;
+    --bg-primary: #f5f6f8;
+    --bg-secondary: #eef0f3;
+    --bg-elevated: #ffffff;
+    --bg-surface: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-subtle: #94a3b8;
+    --accent-emerald: #047857;
+    --accent-emerald-bright: #059669;
+    --accent-cyan: #0284c7;
+    --accent-cyan-muted: #0369a1;
+    --accent-blue: #2563eb;
+    --accent-purple: #7c3aed;
+    --accent-amber: #d97706;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(15, 23, 42, 0.08);
+    --glass-border-hover: rgba(15, 23, 42, 0.16);
+    --glow-emerald: rgba(4, 120, 87, 0.12);
+    --glow-cyan: rgba(2, 132, 199, 0.12);
+    --btn-primary-bg: #0284c7;
+    --btn-primary-text: #ffffff;
+    --btn-secondary-border: #cbd5e1;
+    --btn-secondary-hover-bg: rgba(15, 23, 42, 0.04);
+    --grid-line: rgba(15, 23, 42, 0.04);
+    --selection-bg: rgba(2, 132, 199, 0.15);
+    --scrollbar-track: var(--bg-primary);
+    --scrollbar-thumb: #cbd5e1;
+    --scrollbar-thumb-hover: #94a3b8;
+    --success: #059669;
+    --error: #dc2626;
+    --warning: #d97706;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root:not(.high-contrast) {
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e8;
+    --text-muted: #b0b0c0;
+    --text-subtle: #808090;
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-border-hover: rgba(255, 255, 255, 0.4);
+    --accent-emerald-bright: #00e6a8;
+    --accent-cyan: #40e0ff;
+    --accent-purple: #c084fc;
+    --accent-amber: #fbbf24;
+    --btn-secondary-border: #808090;
+    --focus-ring: #40e0ff;
+  }
+}
+
+/* ============================================================================
+   HIGH CONTRAST MODE ENHANCEMENTS
+   ============================================================================ */
+.high-contrast :focus-visible {
+  outline-width: 3px;
+  outline-offset: 4px;
+}
+
+.high-contrast .border-glow::before {
+  display: none;
+}
+
+.high-contrast .noise-overlay::before {
+  display: none;
+}
+
+.high-contrast .text-gradient,
+.high-contrast .text-gradient-emerald {
+  background: none;
+  -webkit-text-fill-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+/* ============================================================================
+   BASE STYLES
+   ============================================================================ */
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  p {
+    text-wrap: pretty;
+    color: var(--text-secondary);
+  }
+}
+
+/* ============================================================================
+   SCROLLBAR
+   ============================================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--glass-border-hover);
+  border-radius: 2px;
+}
+
+/* ============================================================================
+   SELECTION & FOCUS
+   ============================================================================ */
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 16px 24px;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
+  }
+  
+  .text-gradient-emerald {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--accent-emerald-bright), var(--accent-cyan));
+  }
+  
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .glass-hover {
+    @apply transition-colors duration-150;
+  }
+  
+  .glass-hover:hover {
+    border-color: var(--glass-border-hover);
+  }
+  
+  .border-glow {
+    position: relative;
+  }
+  
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--accent-emerald), transparent 50%, var(--accent-cyan));
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: opacity 0.15s;
+  }
+  
+  .border-glow:hover::before {
+    opacity: 0.8;
+  }
+  
+  .card-glow {
+    box-shadow: 
+      0 0 0 1px var(--glass-border),
+      0 4px 24px rgba(0, 0, 0, 0.5),
+      0 0 60px -30px var(--glow-emerald);
+  }
+  
+  .card-glow-hover:hover {
+    box-shadow: 
+      0 0 0 1px var(--glass-border-hover),
+      0 8px 40px rgba(0, 0, 0, 0.6),
+      0 0 80px -20px var(--glow-cyan);
+  }
+  
+  /* Light mode card shadows */
+  .light .card-glow {
+    box-shadow: 
+      0 0 0 1px var(--glass-border),
+      0 4px 24px rgba(0, 0, 0, 0.08),
+      0 0 60px -30px var(--glow-emerald);
+  }
+  
+  .light .card-glow-hover:hover {
+    box-shadow: 
+      0 0 0 1px var(--glass-border-hover),
+      0 8px 40px rgba(0, 0, 0, 0.12),
+      0 0 80px -20px var(--glow-cyan);
+  }
+  
+  .mono-label {
+    @apply font-mono text-xs uppercase tracking-[0.15em];
+    color: var(--text-muted);
+  }
+  
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40 px-4 md:px-8 lg:px-16;
+  }
+  
+  .container-tight {
+    @apply max-w-5xl mx-auto;
+  }
+  
+  .container-wide {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .section-divider-top {
+    @apply absolute top-0 left-0 right-0 h-px;
+    background: linear-gradient(90deg, transparent, var(--accent-emerald) 20%, var(--accent-cyan) 80%, transparent);
+    opacity: 0.4;
+  }
+  
+  .section-divider-bottom {
+    @apply absolute bottom-0 left-0 right-0 h-px;
+    background: linear-gradient(90deg, transparent, var(--accent-emerald) 20%, var(--accent-cyan) 80%, transparent);
+    opacity: 0.3;
+  }
+  
+  .btn-base {
+    @apply relative inline-flex items-center justify-center font-medium;
+    @apply active:scale-[0.98] active:transition-none;
+    transition: all 0.15s;
+  }
+  
+  .btn-primary {
+    @apply btn-base px-6 py-3 rounded-xl;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+  }
+  
+  .btn-primary:hover {
+    filter: brightness(1.1);
+  }
+  
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+  
+  .btn-secondary {
+    @apply btn-base px-6 py-3 rounded-xl;
+    background: var(--glass-bg);
+    border: 1px solid var(--btn-secondary-border);
+    color: var(--text-primary);
+  }
+  
+  .btn-secondary:hover {
+    background: var(--btn-secondary-hover-bg);
+    border-color: var(--text-muted);
+  }
+  
+  .btn-secondary:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+}
+
+/* ============================================================================
+   BACKGROUND PATTERNS
+   ============================================================================ */
+.bg-grid {
+  background-image: 
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================================
+   CARD COMPONENTS
+   ============================================================================ */
+.bento-card {
+  @apply relative overflow-hidden rounded-2xl;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.bento-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: 
+    0 16px 32px rgba(0, 0, 0, 0.2),
+    0 0 48px -24px var(--glow-emerald);
+}
+
+.light .bento-card:hover {
+  box-shadow: 
+    0 16px 32px rgba(0, 0, 0, 0.08),
+    0 0 48px -24px var(--glow-emerald);
+}
+
+.dashboard-card {
+  @apply bento-card;
+  background: var(--glass-bg);
+}
+
+/* ============================================================================
+   LOADING STATES
+   ============================================================================ */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--glass-border-hover), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer::after {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+   TOGGLE SWITCH
+   ============================================================================ */
+.toggle-track {
+  @apply relative w-14 h-7 rounded-full;
+  background: var(--bg-elevated);
+  border: 1px solid var(--glass-border);
+  transition: all 0.15s;
+}
+
+.toggle-track[data-state="checked"] {
+  background: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+}
+
+.toggle-thumb {
+  @apply absolute top-0.5 left-0.5 w-6 h-6 rounded-full shadow-md;
+  background: var(--text-primary);
+  transition: transform 0.15s;
+}
+
+.toggle-track[data-state="checked"] .toggle-thumb {
+  @apply translate-x-7;
+}
+
+/* ============================================================================
+   AI CHAT COMPONENT
+   ============================================================================ */
+.ai-bubble {
+  @apply fixed bottom-6 right-6 z-50;
+}
+
+.ai-bubble-button {
+  @apply w-14 h-14 rounded-full;
+  @apply flex items-center justify-center shadow-lg;
+  background: linear-gradient(135deg, var(--accent-emerald-bright), var(--accent-cyan));
+  transition: box-shadow 0.15s;
+}
+
+.ai-bubble-button:hover {
+  box-shadow: 0 0 24px var(--glow-emerald);
+}
+
+.ai-chat-window {
+  @apply absolute bottom-16 right-0 w-80 md:w-96;
+  @apply rounded-2xl overflow-hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.light .ai-chat-window {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================================================
+   DECISION LOG
+   ============================================================================ */
+.decision-log {
+  @apply relative pl-6;
+  border-left: 2px solid var(--accent-emerald);
+}
+
+.decision-log::before {
+  content: '';
+  @apply absolute w-2 h-2 rounded-full;
+  left: -5px;
+  top: 0;
+  background: var(--accent-emerald-bright);
+}
+
+/* ============================================================================
+   ACCESSIBILITY: REDUCED MOTION
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+@media print {
+  * {
+    background: white !important;
+    color: #1a1a1a !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+  
+  .ai-bubble,
+  .ai-chat-window,
+  .skip-link,
+  .scroll-progress,
+  footer,
+  .noise-overlay,
+  .bg-grid,
+  [aria-hidden="true"]:not(.print-show) {
+    display: none !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #000 !important;
+  }
+  
+  h1 { font-size: 24pt; margin-bottom: 12pt; }
+  h2 { font-size: 18pt; margin-bottom: 10pt; border-bottom: 1px solid #ccc; padding-bottom: 6pt; }
+  h3 { font-size: 14pt; margin-bottom: 8pt; }
+  
+  a {
+    color: #0066cc !important;
+    text-decoration: underline;
+  }
+  
+  a[href^="http"]:after,
+  a[href^="mailto"]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666 !important;
+  }
+  
+  .bento-card,
+  .glass,
+  .dashboard-card {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 12pt !important;
+    margin-bottom: 12pt !important;
+    background: white !important;
+    page-break-inside: avoid;
+  }
+  
+  section {
+    page-break-inside: avoid;
+    margin-bottom: 24pt !important;
+    padding: 12pt 0 !important;
+  }
+  
+  body::before {
+    content: "Cody Avila | Technical Product Manager | Seattle, WA | cody.r.avila@proton.me";
+    display: block;
+    font-size: 10pt;
+    color: #666 !important;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8pt;
+    margin-bottom: 16pt;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+}
