@@ -74,20 +74,20 @@ export function Contact() {
             </div>
 
             <h2 id="contact-heading" className="text-2xl md:text-3xl font-bold text-text-primary mb-6 leading-relaxed">
-              Software engineer moving into Product Management, with experience
-              shipping features across platforms serving{' '}
+              Senior engineer who&apos;s already doing 60% of a PM&apos;s job—shipping features 
+              across platforms serving{' '}
               <span className="font-mono text-accent-emerald-bright">141M+</span> monthly users.
             </h2>
 
             <p className="text-lg text-text-secondary mb-6 leading-relaxed">
-              I translate business goals into technical execution plans, collaborate on
-              roadmap prioritization, and build resilient systems that drive measurable outcomes.
+              I drive technical execution of product vision, prioritize feature roadmaps based on 
+              user feedback and technical feasibility, and architect systems that solve real user problems.
             </p>
 
             <p className="text-text-muted leading-relaxed mb-8">
-              I turn ambiguous requirements into clear acceptance criteria, facilitate sprint
-              planning and backlog refinement, and bridge conversations between stakeholders
-              and engineering teams. Technical credibility with product instincts.
+              I write technical specs that bridge design and engineering, facilitate sprint
+              planning and backlog refinement, and translate stakeholder goals into clear acceptance 
+              criteria. Technical credibility with product instincts—ready to make the jump.
             </p>
 
             {/* Location & availability */}

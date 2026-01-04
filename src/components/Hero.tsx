@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, type Variants } from 'framer-motion'
-import { FileText, MapPin, Sparkles, ArrowRight } from 'lucide-react'
+import { FileText, MapPin, Sparkles } from 'lucide-react'
 
 // Snappy spring - content appears fast
 const springSnappy = {
@@ -95,16 +95,12 @@ export function Hero() {
           variants={itemVariants}
           className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
         >
-          <span className="flex items-center justify-center gap-3 md:gap-4 text-text-primary">
-            <span>Engineer</span>
-            <ArrowRight 
-              className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-accent-emerald-bright flex-shrink-0" 
-              strokeWidth={2.5}
-              aria-hidden="true"
-            />
-            <span>Product.</span>
+          <span className="block text-text-primary">
+            Senior Engineer{' '}
+            <span className="text-accent-emerald-bright">&amp;</span>{' '}
+            Product Strategist
           </span>
-          <span className="block text-gradient-emerald mt-2">I Bridge the Gap.</span>
+          <span className="block text-gradient-emerald mt-2">I Bridge Code to Customer Impact.</span>
         </motion.h1>
 
         {/* Location badge */}
@@ -121,11 +117,12 @@ export function Hero() {
           variants={itemVariants}
           className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Software engineer transitioning to Product Management, with hands-on experience
-          shipping features across platforms serving{' '}
+          I&apos;ve shipped production features to{' '}
           <span className="font-mono text-text-primary font-semibold">141M+</span>{' '}
-          monthly users. I translate business goals into technical execution plans
-          and help teams ship solutions that drive measurable impact.
+          monthly users—and along the way, realized I care more about the{' '}
+          <em className="text-text-primary">user&apos;s &ldquo;why&rdquo;</em> than just the code&apos;s &ldquo;how.&rdquo;{' '}
+          Now I drive technical execution of product vision, facilitate alignment between 
+          engineering and stakeholders, and turn fuzzy requirements into shipped solutions.
         </motion.p>
 
         {/* CTAs */}

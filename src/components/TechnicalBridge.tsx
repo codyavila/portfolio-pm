@@ -166,10 +166,10 @@ export function TechnicalBridge() {
                 </h3>
                 
                 <p className="text-text-secondary mb-6 leading-relaxed text-sm md:text-base">
-                  Beyond code, I collaborate with cross-functional teams to turn fuzzy
-                  requirements into clear acceptance criteria. I write technical specs
-                  that bridge design and engineering, facilitate sprint planning, and
-                  help translate stakeholder goals into actionable backlogs.
+                  I realized I care more about the user&apos;s problem than just the code.
+                  Now I turn fuzzy requirements into clear acceptance criteria, write 
+                  technical specs that engineers actually want to read, and facilitate 
+                  technical alignment between engineering and business stakeholders.
                 </p>
 
                 <div className="flex flex-wrap gap-2">

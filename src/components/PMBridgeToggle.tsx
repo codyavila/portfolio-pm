@@ -17,12 +17,12 @@ interface SkillCard {
 }
 
 const STRATEGY_SKILLS: SkillCard[] = [
-  { icon: <Target className="w-5 h-5" />, title: 'Sprint Planning', description: 'Facilitate weekly sprint planning sessions, balancing velocity with technical constraints' },
-  { icon: <Layers className="w-5 h-5" />, title: 'Backlog Refinement', description: 'Collaborate on backlog prioritization, translating fuzzy requirements into clear user stories' },
-  { icon: <Search className="w-5 h-5" />, title: 'User Research', description: 'Field research with 50+ editors to map failure points and inform feature definitions' },
-  { icon: <Users className="w-5 h-5" />, title: 'Cross-Functional Collaboration', description: 'Bridge conversations between stakeholders and engineering to align on acceptance criteria' },
-  { icon: <FileText className="w-5 h-5" />, title: 'Technical Specifications', description: 'Write specs that engineers actually want to read—clear AC, edge cases, and constraints' },
-  { icon: <TrendingUp className="w-5 h-5" />, title: 'A/B Testing', description: 'Design and analyze experiments driving 30% improvement in key conversion flows' },
+  { icon: <Target className="w-5 h-5" />, title: 'Sprint Planning', description: 'Facilitate sprint planning sessions, weighing velocity against technical constraints and debt' },
+  { icon: <Layers className="w-5 h-5" />, title: 'Backlog Refinement', description: 'Prioritize feature roadmaps based on user feedback, technical feasibility, and business impact' },
+  { icon: <Search className="w-5 h-5" />, title: 'User Research', description: 'Conducted field research with 50+ editors to map failure points and inform feature scope' },
+  { icon: <Users className="w-5 h-5" />, title: 'Stakeholder Alignment', description: 'Facilitate technical alignment between engineering and business stakeholders on AC and scope' },
+  { icon: <FileText className="w-5 h-5" />, title: 'Technical Specifications', description: 'Write specs engineers want to read—clear acceptance criteria, edge cases, and constraints' },
+  { icon: <TrendingUp className="w-5 h-5" />, title: 'A/B Testing', description: 'Design experiments that drove 30% improvement in key conversion flows—and knew when to kill tests' },
 ]
 
 const TECHNICAL_SKILLS: SkillCard[] = [
